@@ -61,7 +61,7 @@ export class EditDebtAction implements Action {
   }
 }
 
-export class RemoveDebtAction implements Action {
+export class DeleteDebtAction implements Action {
   readonly type = DELETE_DEBT;
 
   constructor(public payload: number) {
@@ -76,3 +76,12 @@ export class PayDebtAction implements Action {
 
   }
 }
+
+export type Actions
+  = CreatePersonAction
+  | EditPersonAction
+  | DeletePersonAction
+  | CreateDebtAction
+  | EditDebtAction
+  | DeleteDebtAction
+  | PayDebtAction;
