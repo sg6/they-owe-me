@@ -21,7 +21,7 @@ export class CreatePersonAction implements Action {
 
 export interface IEditPersonPayload {
   personIndex: number;
-  person: IPerson;
+  person: Person;
 }
 
 export class EditPersonAction implements Action {
@@ -40,17 +40,25 @@ export class DeletePersonAction implements Action {
   }
 }
 
+export interface IDebtPayload {
+  personIndex: number;
+}
+
+export interface ICreateDebtPayload extends IDebtPayload {
+  debt: Debt;
+}
+
 export class CreateDebtAction implements Action {
   readonly type = CREATE_DEBT;
 
-  constructor(public payload: Debt) {
+  constructor(public payload: ICreateDebtPayload) {
 
   }
 }
 
-export interface IEditDebtPayload {
+export interface IEditDebtPayload extends IDebtPayload {
   debtIndex: number;
-  debt: IDebt;
+  debt: Debt;
 }
 
 export class EditDebtAction implements Action {
@@ -61,18 +69,26 @@ export class EditDebtAction implements Action {
   }
 }
 
+export interface IDeleteDebtPayload extends IDebtPayload {
+  debtIndex: number;
+}
+
 export class DeleteDebtAction implements Action {
   readonly type = DELETE_DEBT;
 
-  constructor(public payload: number) {
+  constructor(public payload: IDeleteDebtPayload) {
 
   }
+}
+
+export interface IPayDebtPayload extends IDebtPayload {
+  debtIndex: number;
 }
 
 export class PayDebtAction implements Action {
   readonly type = PAY_DEBT;
 
-  constructor(public payload: number) {
+  constructor(public payload: IPayDebtPayload) {
 
   }
 }

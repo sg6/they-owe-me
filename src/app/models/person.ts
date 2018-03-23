@@ -30,4 +30,26 @@ export class Person implements IPerson {
       });
     }
   }
+
+  toJson(): IPerson {
+    const json: IPerson = {
+      name: this.name,
+      description: this.description,
+      debts: undefined
+    };
+
+    if (this.debts) {
+      json.debts = [];
+
+      this.debts.forEach((debt: Debt) => {
+        json.debts.push(debt.toJson());
+      });
+    }
+
+    return json;
+  }
+
+  copyMe(): Person {
+    return new Person(this.toJson());
+  }
 }

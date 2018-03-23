@@ -32,4 +32,8 @@ export class Debt implements IDebt {
       isPaid: this.isPaid
     };
   }
+
+  copyMe(): Debt {
+    return new Debt(this.toJson());
+  }
 }
