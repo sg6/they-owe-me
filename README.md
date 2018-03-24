@@ -19,3 +19,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## TODO
 
 * use something like immutable.js for reducers
+* make imports more readable
