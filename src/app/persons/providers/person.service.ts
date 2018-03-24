@@ -25,7 +25,7 @@ export class PersonService {
   }
 
   editPerson(personId: number, person: Person) {
-    this.store.dispatch(new personAction.EditPersonAction({personIndex: personId, person: person}));
+    this.store.dispatch(new personAction.EditPersonAction({personId: personId, person: person}));
   }
 
   deletePerson(personId: number) {
@@ -33,18 +33,18 @@ export class PersonService {
   }
 
   createDebt(personId: number, debt: Debt) {
-    this.store.dispatch(new personAction.CreateDebtAction({personIndex: personId, debt: debt}));
+    this.store.dispatch(new personAction.CreateDebtAction({personId: personId, debt: debt}));
   }
 
   editDebt(personId: number, debtId: number, debt: Debt) {
-    this.store.dispatch(new personAction.EditDebtAction({personIndex: personId, debtIndex: debtId, debt: debt}));
+    this.store.dispatch(new personAction.EditDebtAction({personId: personId, debtId: debtId, debt: debt}));
   }
 
   deleteDebt(personId: number, debtId: number) {
-    this.store.dispatch(new personAction.DeleteDebtAction({personIndex: personId, debtIndex: debtId}));
+    this.store.dispatch(new personAction.DeleteDebtAction({personId: personId, debtId: debtId}));
   }
 
   payDebt(personId: number, debtId: number) {
-    this.store.dispatch(new personAction.PayDebtAction({personIndex: personId, debtIndex: debtId}));
+    this.store.dispatch(new personAction.PayDebtAction({personId: personId, debtId: debtId}));
   }
 }

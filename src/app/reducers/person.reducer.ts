@@ -19,7 +19,7 @@ export function personReducer(state = initialState, action: personActions.Action
     }
     case personActions.EDIT_PERSON: {
       const payload = <personActions.IEditPersonPayload>action.payload;
-      return createNewStateWithUpdatedPerson(state.persons, payload.personIndex, payload.person);
+      return createNewStateWithUpdatedPerson(state.persons, payload.personId, payload.person);
     }
     case personActions.DELETE_PERSON: {
       return {
@@ -28,33 +28,33 @@ export function personReducer(state = initialState, action: personActions.Action
     }
     case personActions.CREATE_DEBT: {
       const payload = <personActions.ICreateDebtPayload>action.payload;
-      const person = state.persons[payload.personIndex].copyMe();
+      const person = state.persons[payload.personId].copyMe();
 
       person.debts = addNewArrayItemImmutable(person.debts, payload.debt);
-      return createNewStateWithUpdatedPerson(state.persons, payload.personIndex, person);
+      return createNewStateWithUpdatedPerson(state.persons, payload.personId, person);
     }
     case personActions.EDIT_DEBT: {
       const payload = <personActions.IEditDebtPayload>action.payload;
-      const person = state.persons[payload.personIndex].copyMe();
+      const person = state.persons[payload.personId].copyMe();
 
-      person.debts = updateArrayItemImmutable(person.debts, payload.debtIndex, payload.debt);
-      return createNewStateWithUpdatedPerson(state.persons, payload.personIndex, person);
+      person.debts = updateArrayItemImmutable(person.debts, payload.debtId, payload.debt);
+      return createNewStateWithUpdatedPerson(state.persons, payload.personId, person);
     }
     case personActions.DELETE_DEBT: {
       const payload = <personActions.IDeleteDebtPayload>action.payload;
-      const person = state.persons[payload.personIndex].copyMe();
+      const person = state.persons[payload.personId].copyMe();
 
-      person.debts = removeArrayItemImmutable(person.debts, payload.debtIndex);
-      return createNewStateWithUpdatedPerson(state.persons, payload.personIndex, person);
+      person.debts = removeArrayItemImmutable(person.debts, payload.debtId);
+      return createNewStateWithUpdatedPerson(state.persons, payload.personId, person);
     }
     case personActions.PAY_DEBT: {
       const payload = <personActions.IPayDebtPayload>action.payload;
-      const person = state.persons[payload.personIndex].copyMe();
-      const debt = person.debts[payload.debtIndex].copyMe();
+      const person = state.persons[payload.personId].copyMe();
+      const debt = person.debts[payload.debtId].copyMe();
       debt.isPaid = true;
 
-      person.debts = updateArrayItemImmutable(person.debts, payload.debtIndex, debt);
-      return createNewStateWithUpdatedPerson(state.persons, payload.personIndex, person);
+      person.debts = updateArrayItemImmutable(person.debts, payload.debtId, debt);
+      return createNewStateWithUpdatedPerson(state.persons, payload.personId, person);
     }
     default: {
       return initialState;

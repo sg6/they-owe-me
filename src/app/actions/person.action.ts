@@ -20,7 +20,7 @@ export class CreatePersonAction implements Action {
 }
 
 export interface IEditPersonPayload {
-  personIndex: number;
+  personId: number;
   person: Person;
 }
 
@@ -41,7 +41,7 @@ export class DeletePersonAction implements Action {
 }
 
 export interface IDebtPayload {
-  personIndex: number;
+  personId: number;
 }
 
 export interface ICreateDebtPayload extends IDebtPayload {
@@ -57,7 +57,7 @@ export class CreateDebtAction implements Action {
 }
 
 export interface IEditDebtPayload extends IDebtPayload {
-  debtIndex: number;
+  debtId: number;
   debt: Debt;
 }
 
@@ -70,7 +70,7 @@ export class EditDebtAction implements Action {
 }
 
 export interface IDeleteDebtPayload extends IDebtPayload {
-  debtIndex: number;
+  debtId: number;
 }
 
 export class DeleteDebtAction implements Action {
@@ -82,7 +82,7 @@ export class DeleteDebtAction implements Action {
 }
 
 export interface IPayDebtPayload extends IDebtPayload {
-  debtIndex: number;
+  debtId: number;
 }
 
 export class PayDebtAction implements Action {

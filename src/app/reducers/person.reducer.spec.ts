@@ -56,13 +56,13 @@ describe('personReducer', () => {
 
   describe('EditPersonAction', () => {
     it('should update person', () => {
-      const action = new personActions.EditPersonAction({personIndex: 1, person: newPerson});
+      const action = new personActions.EditPersonAction({personId: 1, person: newPerson});
       const result = personReducer(oldState, action);
       expect(result.persons[1]).toBe(newPerson);
     });
 
     it('should not modify old state', () => {
-      const action = new personActions.EditPersonAction({personIndex: 1, person: newPerson});
+      const action = new personActions.EditPersonAction({personId: 1, person: newPerson});
       const result = personReducer(oldState, action);
       expect(oldState.persons[1]).not.toBe(newPerson);
     });
@@ -84,13 +84,13 @@ describe('personReducer', () => {
 
   describe('CreateDebtAction', () => {
     it('should add new debt to person', () => {
-      const action = new personActions.CreateDebtAction({personIndex: 0, debt: newDebt});
+      const action = new personActions.CreateDebtAction({personId: 0, debt: newDebt});
       const result = personReducer(oldState, action);
       expect(result.persons[0].debts.length).toEqual(3);
     });
 
     it('should not modify old state', () => {
-      const action = new personActions.CreateDebtAction({personIndex: 0, debt: newDebt});
+      const action = new personActions.CreateDebtAction({personId: 0, debt: newDebt});
       const result = personReducer(oldState, action);
       expect(oldState.persons[0].debts.length).toEqual(2);
     });
@@ -98,13 +98,13 @@ describe('personReducer', () => {
 
   describe('EditDebtAction', () => {
     it('should update debt', () => {
-      const action = new personActions.EditDebtAction({personIndex: 0, debtIndex: 0, debt: newDebt});
+      const action = new personActions.EditDebtAction({personId: 0, debtId: 0, debt: newDebt});
       const result = personReducer(oldState, action);
       expect(result.persons[0].debts[0]).toBe(newDebt);
     });
 
     it('should not modify old state', () => {
-      const action = new personActions.EditDebtAction({personIndex: 0, debtIndex: 0, debt: newDebt});
+      const action = new personActions.EditDebtAction({personId: 0, debtId: 0, debt: newDebt});
       const result = personReducer(oldState, action);
       expect(oldState.persons[0].debts[0]).not.toBe(newDebt);
     });
@@ -112,13 +112,13 @@ describe('personReducer', () => {
 
   describe('DeleteDebtAction', () => {
     it('should remove debt', () => {
-      const action = new personActions.DeleteDebtAction({personIndex: 0, debtIndex: 0});
+      const action = new personActions.DeleteDebtAction({personId: 0, debtId: 0});
       const result = personReducer(oldState, action);
       expect(result.persons[0].debts.length).toEqual(1);
     });
 
     it('should not modify old state', () => {
-      const action = new personActions.DeleteDebtAction({personIndex: 0, debtIndex: 0});
+      const action = new personActions.DeleteDebtAction({personId: 0, debtId: 0});
       const result = personReducer(oldState, action);
       expect(oldState.persons[0].debts.length).toEqual(2);
     });
@@ -126,13 +126,13 @@ describe('personReducer', () => {
 
   describe('PayDebtAction', () => {
     it('should set debt as paid', () => {
-      const action = new personActions.PayDebtAction({personIndex: 0, debtIndex: 0});
+      const action = new personActions.PayDebtAction({personId: 0, debtId: 0});
       const result = personReducer(oldState, action);
       expect(result.persons[0].debts[0].isPaid).toBeTruthy();
     });
 
     it('should not modify old state', () => {
-      const action = new personActions.PayDebtAction({personIndex: 0, debtIndex: 0});
+      const action = new personActions.PayDebtAction({personId: 0, debtId: 0});
       const result = personReducer(oldState, action);
       expect(oldState.persons[0].debts[0].isPaid).toBeFalsy();
     });
