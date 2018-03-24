@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 const routes: Routes = [
   { path: '', redirectTo: 'persons', pathMatch: 'full' },
-  { path: 'home', loadChildren: 'app/persons/persons.module#PersonsModule'}
+  { path: 'home', loadChildren: 'app/debt-management/debt-management.module#DebtManagementModule'}
 ];
 
 @NgModule({

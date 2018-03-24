@@ -6,7 +6,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {StoreModule} from '@ngrx/store';
 import {personReducer} from './reducers/person.reducer';
 
-
 @NgModule({
   declarations: [
     AppComponent
