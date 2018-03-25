@@ -1,19 +1,23 @@
 import {Injectable} from '@angular/core';
-import {IState} from '../../reducers/person.reducer';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Person} from '../../models/person';
 import {Debt} from '../../models/debt';
 import * as personAction from './../../actions/person.action';
+import {IAppState} from '../../models/appState';
 
 @Injectable()
 export class PersonService {
-  constructor(private store: Store<IState>) {
+  constructor(private store: Store<IAppState>) {
 
   }
 
   getPersons(): Observable<Person[]> {
-    return this.store.select(state => state.persons);
+    return this.store.select(state => state.persons.persons);
+  }
+
+  getPerson(personId: number): Observable<Person> {
+    return this.store.select(state => state.persons[personId]);
   }
 
   getDebts(personId: number): Observable<Debt[]> {

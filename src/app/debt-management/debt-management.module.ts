@@ -9,11 +9,15 @@ import {DebtListComponent} from './components/debts/container/debt-list.componen
 import {DebtItemComponent} from './components/debts/container/debt-item.component';
 import {DebtDetailComponent} from './components/debts/detail/debt-detail.component';
 import {DebtEditComponent} from './components/debts/detail/debt-edit.component';
+import {PersonService} from './providers/person.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    DebtManagementRoutingModule
+    DebtManagementRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     PersonListComponent,
@@ -24,6 +28,9 @@ import {DebtEditComponent} from './components/debts/detail/debt-edit.component';
     DebtItemComponent,
     DebtDetailComponent,
     DebtEditComponent
+  ],
+  providers: [
+    PersonService
   ]
 })
 export class DebtManagementModule {

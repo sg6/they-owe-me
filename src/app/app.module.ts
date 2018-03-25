@@ -1,10 +1,10 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {StoreModule} from '@ngrx/store';
 import {personReducer} from './reducers/person.reducer';
+import './core/rxjs-extensions';
 
 @NgModule({
   declarations: [
@@ -12,10 +12,9 @@ import {personReducer} from './reducers/person.reducer';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({persons: personReducer})
+    StoreModule.forRoot({persons: personReducer})//,
+    //StoreDevtoolsModule.instrument({maxAge: 25})
   ],
   providers: [],
   bootstrap: [AppComponent]

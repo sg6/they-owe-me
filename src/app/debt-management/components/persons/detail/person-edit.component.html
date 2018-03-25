@@ -1,3 +1,21 @@
-<div>
-  Person-Edit
-</div>
+<form [formGroup]="personForm" novalidate>
+  <div>
+    <label>Name
+      <input type="text" class="form-control" name="name" formControlName="name">
+      <span *ngIf="personForm.get('name').hasError('required') && personForm.get('name').touched">
+        Name is required
+      </span>
+    </label>
+  </div>
+  <div>
+    <label>Description
+      <input type="text" class="form-control" name="description" formControlName="description">
+      <span *ngIf="personForm.get('description').hasError('required') && personForm.get('description').touched">
+        Description is required
+      </span>
+    </label>
+  </div>
+  <div>
+    <button [disabled]="personForm.invalid" (click)="savePerson()">Submit</button>
+  </div>
+</form>

@@ -1,3 +1,7 @@
-<section class="container">
-  <h2>Personen</h2>
+<header>
+  <h2>Persons</h2>
+  <button [routerLink]="['/debt-management/edit', 'new']">Add</button>
+</header>
+<section>
+  <app-person-item *ngFor="let person of persons$ | async"></app-person-item>
 </section>
