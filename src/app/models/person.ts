@@ -52,4 +52,16 @@ export class Person implements IPerson {
   copyMe(): Person {
     return new Person(this.toJson());
   }
+
+  openDebtsSum(): number {
+    return this.debts.reduce((openDebtsSum: number, debt: Debt) => {
+      if (debt.isPaid) {
+        return openDebtsSum;
+      }
+
+      return debt.amount + openDebtsSum;
+    }, 0);
+  }
 }
+
+

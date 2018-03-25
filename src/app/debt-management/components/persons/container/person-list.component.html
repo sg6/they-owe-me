@@ -4,7 +4,7 @@
 </header>
 <section>
   <div class="row" *ngFor="let person of persons$ | async; let i = index">
-    <app-person-item></app-person-item>
+    <app-person-item [person]="person"></app-person-item>
     <button [routerLink]="['/debt-management/edit', i]">Edit</button>
     <button (click)="deletePerson(i)">Delete</button>
   </div>
