@@ -11,6 +11,7 @@ import {DebtDetailComponent} from './components/debts/detail/debt-detail.compone
 import {DebtEditComponent} from './components/debts/detail/debt-edit.component';
 import {PersonService} from './providers/person.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {PersonDataComponent} from './components/persons/detail/person-data.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     PersonItemComponent,
     PersonEditComponent,
     PersonDetailComponent,
+    PersonDataComponent,
     DebtListComponent,
     DebtItemComponent,
     DebtDetailComponent,

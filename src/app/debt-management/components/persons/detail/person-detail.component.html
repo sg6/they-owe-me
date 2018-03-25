@@ -1,3 +1,6 @@
 <header>
   <h2>Persondetails</h2>
 </header>
+<section *ngIf="person$ | async">
+  <app-person-data [person]="person$ | async"></app-person-data>
+</section>
