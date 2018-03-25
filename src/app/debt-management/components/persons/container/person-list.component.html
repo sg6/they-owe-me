@@ -3,5 +3,9 @@
   <button [routerLink]="['/debt-management/edit', 'new']">Add</button>
 </header>
 <section>
-  <app-person-item *ngFor="let person of persons$ | async"></app-person-item>
+  <div class="row" *ngFor="let person of persons$ | async; let i = index">
+    <app-person-item></app-person-item>
+    <button [routerLink]="['/debt-management/edit', i]">Edit</button>
+    <button (click)="deletePerson(i)">Delete</button>
+  </div>
 </section>

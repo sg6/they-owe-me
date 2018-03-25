@@ -17,4 +17,8 @@ export class PersonListComponent implements OnInit {
   ngOnInit() {
     this.persons$ = this.personService.getPersons();
   }
+
+  deletePerson(personId: number) {
+    this.personService.deletePerson(personId);
+  }
 }

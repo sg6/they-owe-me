@@ -17,11 +17,11 @@ export class PersonService {
   }
 
   getPerson(personId: number): Observable<Person> {
-    return this.store.select(state => state.persons[personId]);
+    return this.store.select(state => state.persons.persons[personId]);
   }
 
   getDebts(personId: number): Observable<Debt[]> {
-    return this.store.select(state => state.persons[personId].debts);
+    return this.store.select(state => state.persons.persons[personId].debts);
   }
 
   createPerson(person: Person) {
