@@ -1,6 +1,12 @@
 <header>
   <h2>Persondetails</h2>
 </header>
-<section *ngIf="person$ | async">
-  <app-person-data [person]="person$ | async"></app-person-data>
+<section *ngIf="person$ | async as person">
+  <section class="details">
+    <div>{{ person.name }}</div>
+    <div>{{ person.description }}</div>
+  </section>
+  <section class="debts">
+    <app-debt-list></app-debt-list>
+  </section>
 </section>
