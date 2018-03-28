@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PersonService} from '../../../providers/person.service';
+import {DebtManagementService} from '../../../providers/debt-management.service';
 import {Observable} from 'rxjs/Observable';
 import {Person} from '../../../../models/person';
 
@@ -11,15 +11,15 @@ import {Person} from '../../../../models/person';
 export class PersonListComponent implements OnInit {
   persons$: Observable<Person[]>;
 
-  constructor(private personService: PersonService) {
+  constructor(private debtManagementService: DebtManagementService) {
 
   }
 
   ngOnInit() {
-    this.persons$ = this.personService.getPersons();
+    this.persons$ = this.debtManagementService.getPersons();
   }
 
   deletePerson(personId: number) {
-    this.personService.deletePerson(personId);
+    this.debtManagementService.deletePerson(personId);
   }
 }

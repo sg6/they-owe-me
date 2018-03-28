@@ -7,7 +7,7 @@ import * as personAction from './../../actions/person.action';
 import {IAppState} from '../../models/appState';
 
 @Injectable()
-export class PersonService {
+export class DebtManagementService {
   constructor(private store: Store<IAppState>) {
 
   }

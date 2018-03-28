@@ -9,7 +9,7 @@ import {DebtListComponent} from './components/debts/container/debt-list.componen
 import {DebtItemComponent} from './components/debts/container/debt-item.component';
 import {DebtDetailComponent} from './components/debts/detail/debt-detail.component';
 import {DebtEditComponent} from './components/debts/detail/debt-edit.component';
-import {PersonService} from './providers/person.service';
+import {DebtManagementService} from './providers/debt-management.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PersonDataComponent} from './components/persons/detail/person-data.component';
 
@@ -32,7 +32,7 @@ import {PersonDataComponent} from './components/persons/detail/person-data.compo
     DebtEditComponent
   ],
   providers: [
-    PersonService
+    DebtManagementService
   ]
 })
 export class DebtManagementModule {

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Person} from '../../../../models/person';
 import {ActivatedRoute} from '@angular/router';
-import {PersonService} from '../../../providers/person.service';
+import {DebtManagementService} from '../../../providers/debt-management.service';
 
 @Component({
   selector: 'app-person-detail',
@@ -12,12 +12,12 @@ export class PersonDetailComponent implements OnInit {
   personId: number;
   person$: Observable<Person>;
 
-  constructor(private activatedRoute: ActivatedRoute, private personService: PersonService) {
+  constructor(private activatedRoute: ActivatedRoute, private debtManagementService: DebtManagementService) {
 
   }
 
   ngOnInit() {
     this.personId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.person$ = this.personService.getPerson(this.personId);
+    this.person$ = this.debtManagementService.getPerson(this.personId);
   }
 }

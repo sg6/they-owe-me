@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PersonService} from '../../../providers/person.service';
+import {DebtManagementService} from '../../../providers/debt-management.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Person} from '../../../../models/person';
 
@@ -12,7 +12,7 @@ export class PersonEditComponent implements OnInit{
   personForm: FormGroup;
   personId: number;
 
-  constructor(private personService: PersonService,
+  constructor(private debtManagementService: DebtManagementService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder) {
@@ -35,7 +35,7 @@ export class PersonEditComponent implements OnInit{
   }
 
   getPerson() {
-    this.personService.getPerson(this.personId)
+    this.debtManagementService.getPerson(this.personId)
       .subscribe(person => this.personForm.patchValue(person));
   }
 
@@ -50,9 +50,9 @@ export class PersonEditComponent implements OnInit{
     const person = new Person(this.personForm.value);
 
     if (this.isNewPerson) {
-      this.personService.createPerson(person);
+      this.debtManagementService.createPerson(person);
     } else {
-      this.personService.editPerson(this.personId, person);
+      this.debtManagementService.editPerson(this.personId, person);
     }
 
     this.router.navigate([`/debt-management`]);
