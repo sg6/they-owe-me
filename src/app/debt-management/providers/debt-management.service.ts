@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
+import {createSelector, Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Person} from '../../models/person';
 import {Debt} from '../../models/debt';
@@ -13,15 +13,19 @@ export class DebtManagementService {
   }
 
   getPersons(): Observable<Person[]> {
-    return this.store.select(state => state.persons.persons);
+    return this.store.select(this.selectFeature);
   }
 
   getPerson(personId: number): Observable<Person> {
-    return this.store.select(state => state.persons.persons[personId]);
+    return this.store.select(this.selectPerson(personId));
   }
 
   getDebts(personId: number): Observable<Debt[]> {
-    return this.store.select(state => state.persons.persons[personId].debts);
+    return this.store.select(this.selectDebts(personId));
+  }
+
+  getDebt(personId: number, debtId: number): Observable<Debt> {
+    return this.store.select(this.selectDebt(personId, debtId));
   }
 
   createPerson(person: Person) {
@@ -50,5 +54,19 @@ export class DebtManagementService {
 
   payDebt(personId: number, debtId: number) {
     this.store.dispatch(new personAction.PayDebtAction({personId: personId, debtId: debtId}));
+  }
+
+  private selectFeature = (state: IAppState) => state.persons.persons;
+
+  private selectPerson(personId: number) {
+    return createSelector(this.selectFeature, (persons: Person[]) => persons[personId]);
+  }
+
+  private selectDebts(personId: number) {
+    return createSelector(this.selectPerson(personId), (person: Person) => person.debts);
+  }
+
+  private selectDebt(personId: number, debtId: number) {
+    return createSelector(this.selectDebts(personId), (debts: Debt[]) => debts[debtId]);
   }
 }
