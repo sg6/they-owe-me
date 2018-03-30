@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import './core/rxjs-extensions';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -11,8 +10,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    StoreDevtoolsModule.instrument({maxAge: 25})
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,11 @@
 <header>
   <h2>Persons</h2>
-  <button [routerLink]="['/debt-management/edit', 'new']">Add</button>
+  <button [routerLink]="['/debt-management/person/edit', 'new']">Add</button>
 </header>
 <section>
   <div class="row" *ngFor="let person of persons$ | async">
-    <app-person-item [person]="person" [routerLink]="['debt-management/detail', person.id]"></app-person-item>
-    <button [routerLink]="['/debt-management/edit', person.id]">Edit</button>
+    <app-person-item [person]="person" [routerLink]="['person/detail', person.id]"></app-person-item>
+    <button [routerLink]="['/debt-management/person/edit', person.id]">Edit</button>
     <button (click)="deletePerson(person)">Delete</button>
   </div>
 </section>

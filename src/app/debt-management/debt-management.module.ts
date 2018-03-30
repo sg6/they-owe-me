@@ -13,6 +13,7 @@ import {DebtManagementService} from './providers/debt-management.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {debtManagementReducer} from './store/reducers/debtManagement.reducer';
 import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {StoreModule} from '@ngrx/store';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({debtManagement: debtManagementReducer}),
+    StoreDevtoolsModule.instrument({maxAge: 25})
   ],
   declarations: [
     PersonListComponent,

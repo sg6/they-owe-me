@@ -1,3 +1,11 @@
-<div>
-  debt-list
-</div>
+<header>
+  <h3>Debts</h3>
+  <button>Create Debt</button>
+</header>
+<section>
+  <div class="row" *ngFor="let debt of debts$ | async">
+    <app-debt-item [debt]="debt"></app-debt-item>
+    <button>Edit</button>
+    <button>Delete</button>
+  </div>
+</section>
