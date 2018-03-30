@@ -52,7 +52,8 @@ export class PersonEditComponent implements OnInit{
     if (this.isNewPerson) {
       this.debtManagementService.createPerson(person);
     } else {
-      this.debtManagementService.editPerson(this.personId, person);
+      person.id = this.personId;
+      this.debtManagementService.editPerson(person);
     }
 
     this.router.navigate([`/debt-management`]);

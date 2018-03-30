@@ -1,12 +1,14 @@
 import {Debt, IDebt} from './debt';
 
 export interface IPerson {
+  id: number;
   name: string;
   description: string;
   debts: IDebt[];
 }
 
 export class Person implements IPerson {
+  id: number;
   name: string;
   description: string;
   debts: Debt[];
@@ -15,11 +17,20 @@ export class Person implements IPerson {
     this.fromJson(json);
   }
 
+  static createIndexFunc(personId: Number) {
+    return (person: Person) => {
+      console.log(personId);
+      console.log(person.id);
+      return person.id === personId;
+    };
+  }
+
   fromJson(json: IPerson) {
     if (!json) {
       return;
     }
 
+    this.id = json.id;
     this.name = json.name;
     this.description = json.description;
     this.debts = [];
@@ -33,6 +44,7 @@ export class Person implements IPerson {
 
   toJson(): IPerson {
     const json: IPerson = {
+      id: this.id,
       name: this.name,
       description: this.description,
       debts: undefined
@@ -61,6 +73,10 @@ export class Person implements IPerson {
 
       return debt.amount + openDebtsSum;
     }, 0);
+  }
+
+  getIndexFunc() {
+    return Person.createIndexFunc(this.id);
   }
 }
 

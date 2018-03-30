@@ -19,7 +19,7 @@ export class PersonListComponent implements OnInit {
     this.persons$ = this.debtManagementService.getPersons();
   }
 
-  deletePerson(personId: number) {
-    this.debtManagementService.deletePerson(personId);
+  deletePerson(person: Person) {
+    this.debtManagementService.deletePerson(person);
   }
 }

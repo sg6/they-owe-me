@@ -2,7 +2,13 @@ export function addNewArrayItemImmutable(values: any[], newValue: any) {
   return values ? values.concat(newValue) : null;
 }
 
-export function updateArrayItemImmutable(values: any[], updateIndex: number, newItem) {
+export function updateArrayItemImmutable(values: any[], newItem: any, indexFunc: (item: any) => boolean) {
+  if (!values) {
+    return values;
+  }
+
+  const updateIndex = values.findIndex(indexFunc);
+
   if (!isArrayIndexValid(values, updateIndex)) {
     return values;
   }
@@ -14,7 +20,13 @@ export function updateArrayItemImmutable(values: any[], updateIndex: number, new
   ];
 }
 
-export function removeArrayItemImmutable(values: any[], removeIndex: number) {
+export function removeArrayItemImmutable(values: any[], indexFunc: (item: any) => boolean) {
+  if (!values) {
+    return values;
+  }
+
+  const removeIndex = values.findIndex(indexFunc);
+
   if (!isArrayIndexValid(values, removeIndex)) {
     return values;
   }
@@ -27,4 +39,17 @@ export function removeArrayItemImmutable(values: any[], removeIndex: number) {
 
 export function isArrayIndexValid(values: any[], index: number) {
   return Array.isArray(values) && index >= 0 && index < values.length;
+}
+
+export function getArrayItem(values: any[], indexFunc: (item: any) => boolean) {
+  const findIndex = values.findIndex(indexFunc);
+
+  return values[findIndex];
+}
+
+export function createNewId(values: any[]) {
+  let newId = values.reduce((prev, current) => (prev['id'] > current['id']) ? prev['id'] : current['id'], 0);
+  newId++;
+
+  return newId;
 }

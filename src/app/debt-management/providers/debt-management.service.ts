@@ -5,6 +5,7 @@ import {Person} from '../../models/person';
 import {Debt} from '../../models/debt';
 import * as personAction from './../../actions/person.action';
 import {IAppState} from '../../models/appState';
+import {getArrayItem} from '../../helper/utilities';
 
 @Injectable()
 export class DebtManagementService {
@@ -29,37 +30,37 @@ export class DebtManagementService {
   }
 
   createPerson(person: Person) {
-    this.store.dispatch(new personAction.CreatePersonAction(person));
+    this.store.dispatch(new personAction.CreatePersonAction({person: person}));
   }
 
-  editPerson(personId: number, person: Person) {
-    this.store.dispatch(new personAction.EditPersonAction({personId: personId, person: person}));
+  editPerson(person: Person) {
+    this.store.dispatch(new personAction.EditPersonAction({person: person}));
   }
 
-  deletePerson(personId: number) {
-    this.store.dispatch(new personAction.DeletePersonAction(personId));
+  deletePerson(person: Person) {
+    this.store.dispatch(new personAction.DeletePersonAction({person: person}));
   }
 
-  createDebt(personId: number, debt: Debt) {
-    this.store.dispatch(new personAction.CreateDebtAction({personId: personId, debt: debt}));
+  createDebt(person: Person, debt: Debt) {
+    this.store.dispatch(new personAction.CreateDebtAction({person: person, debt: debt}));
   }
 
-  editDebt(personId: number, debtId: number, debt: Debt) {
-    this.store.dispatch(new personAction.EditDebtAction({personId: personId, debtId: debtId, debt: debt}));
+  editDebt(person: Person, debt: Debt) {
+    this.store.dispatch(new personAction.EditDebtAction({person: person, debt: debt}));
   }
 
-  deleteDebt(personId: number, debtId: number) {
-    this.store.dispatch(new personAction.DeleteDebtAction({personId: personId, debtId: debtId}));
+  deleteDebt(person: Person, debt: Debt) {
+    this.store.dispatch(new personAction.DeleteDebtAction({person: person, debt: debt}));
   }
 
-  payDebt(personId: number, debtId: number) {
-    this.store.dispatch(new personAction.PayDebtAction({personId: personId, debtId: debtId}));
+  payDebt(person: Person, debt: Debt) {
+    this.store.dispatch(new personAction.PayDebtAction({person: person, debt: debt}));
   }
 
   private selectFeature = (state: IAppState) => state.persons.persons;
 
   private selectPerson(personId: number) {
-    return createSelector(this.selectFeature, (persons: Person[]) => persons[personId]);
+    return createSelector(this.selectFeature, (persons: Person[]) => getArrayItem(persons, Person.createIndexFunc(personId)));
   }
 
   private selectDebts(personId: number) {
@@ -67,6 +68,6 @@ export class DebtManagementService {
   }
 
   private selectDebt(personId: number, debtId: number) {
-    return createSelector(this.selectDebts(personId), (debts: Debt[]) => debts[debtId]);
+    return createSelector(this.selectDebts(personId), (debts: Debt[]) => getArrayItem(debts, Debt.createIndexFunc(debtId)));
   }
 }

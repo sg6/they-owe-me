@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {StoreModule} from '@ngrx/store';
 import {personReducer} from './reducers/person.reducer';
 import './core/rxjs-extensions';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -13,8 +14,8 @@ import './core/rxjs-extensions';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({persons: personReducer})//,
-    //StoreDevtoolsModule.instrument({maxAge: 25})
+    StoreModule.forRoot({persons: personReducer}),
+    StoreDevtoolsModule.instrument({maxAge: 25})
   ],
   providers: [],
   bootstrap: [AppComponent]

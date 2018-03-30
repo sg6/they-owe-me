@@ -1,6 +1,6 @@
 import {Person} from '../models/person';
 import * as personActions from './../actions/person.action';
-import {addNewArrayItemImmutable, removeArrayItemImmutable, updateArrayItemImmutable} from '../helper/utilities';
+import {addNewArrayItemImmutable, createNewId, removeArrayItemImmutable, updateArrayItemImmutable} from '../helper/utilities';
 
 export interface IState {
   persons: Person[];
@@ -13,48 +13,25 @@ const initialState: IState = {
 export function personReducer(state = initialState, action: personActions.Actions): IState {
   switch (action.type) {
     case personActions.CREATE_PERSON: {
-      return {
-        persons: addNewArrayItemImmutable(state.persons, action.payload)
-      };
+      return handleCreatePersonAction(state, <personActions.IPersonPayload>action.payload);
     }
     case personActions.EDIT_PERSON: {
-      const payload = <personActions.IEditPersonPayload>action.payload;
-      return createNewStateWithUpdatedPerson(state.persons, payload.personId, payload.person);
+      return handleEditPersonAction(state, <personActions.IPersonPayload>action.payload);
     }
     case personActions.DELETE_PERSON: {
-      return {
-        persons: removeArrayItemImmutable(state.persons, action.payload)
-      };
+      return handleDeletePersonAction(state, <personActions.IPersonPayload>action.payload);
     }
     case personActions.CREATE_DEBT: {
-      const payload = <personActions.ICreateDebtPayload>action.payload;
-      const person = state.persons[payload.personId].copyMe();
-
-      person.debts = addNewArrayItemImmutable(person.debts, payload.debt);
-      return createNewStateWithUpdatedPerson(state.persons, payload.personId, person);
+      return handleCreateDebtAction(state, <personActions.IDebtPayload>action.payload);
     }
     case personActions.EDIT_DEBT: {
-      const payload = <personActions.IEditDebtPayload>action.payload;
-      const person = state.persons[payload.personId].copyMe();
-
-      person.debts = updateArrayItemImmutable(person.debts, payload.debtId, payload.debt);
-      return createNewStateWithUpdatedPerson(state.persons, payload.personId, person);
+      return handleEditDebtAction(state, <personActions.IDebtPayload>action.payload);
     }
     case personActions.DELETE_DEBT: {
-      const payload = <personActions.IDeleteDebtPayload>action.payload;
-      const person = state.persons[payload.personId].copyMe();
-
-      person.debts = removeArrayItemImmutable(person.debts, payload.debtId);
-      return createNewStateWithUpdatedPerson(state.persons, payload.personId, person);
+      return handleDeleteDebtAction(state, <personActions.IDebtPayload>action.payload);
     }
     case personActions.PAY_DEBT: {
-      const payload = <personActions.IPayDebtPayload>action.payload;
-      const person = state.persons[payload.personId].copyMe();
-      const debt = person.debts[payload.debtId].copyMe();
-      debt.isPaid = true;
-
-      person.debts = updateArrayItemImmutable(person.debts, payload.debtId, debt);
-      return createNewStateWithUpdatedPerson(state.persons, payload.personId, person);
+      return handlePayDebtAction(state, <personActions.IDebtPayload>action.payload);
     }
     default: {
       return initialState;
@@ -62,9 +39,55 @@ export function personReducer(state = initialState, action: personActions.Action
   }
 }
 
-function createNewStateWithUpdatedPerson(persons: Person[], updateIndex: number, updatedPerson: Person): IState {
+function createNewStateWithUpdatedPerson(persons: Person[], updatedPerson: Person): IState {
   return {
-    persons: updateArrayItemImmutable(persons, updateIndex, updatedPerson)
+    persons: updateArrayItemImmutable(persons, updatedPerson, updatedPerson.getIndexFunc())
   };
 }
 
+function handleCreatePersonAction(state: IState, payload: personActions.IPersonPayload) {
+  payload.person.id = createNewId(state.persons);
+  return {
+    persons: addNewArrayItemImmutable(state.persons, payload.person)
+  };
+}
+
+function handleEditPersonAction(state: IState, payload: personActions.IPersonPayload) {
+  return createNewStateWithUpdatedPerson(state.persons, payload.person);
+}
+
+function handleDeletePersonAction(state: IState, payload: personActions.IPersonPayload) {
+  return {
+    persons: removeArrayItemImmutable(state.persons, payload.person.getIndexFunc())
+  };
+}
+
+function handleCreateDebtAction(state: IState, payload: personActions.IDebtPayload) {
+  const person = payload.person.copyMe();
+
+  person.debts = addNewArrayItemImmutable(person.debts, payload.debt);
+  return createNewStateWithUpdatedPerson(state.persons, person);
+}
+
+function handleEditDebtAction(state: IState, payload: personActions.IDebtPayload) {
+  const person = payload.person.copyMe();
+
+  person.debts = updateArrayItemImmutable(person.debts, payload.debt, payload.debt.getIndexFunc());
+  return createNewStateWithUpdatedPerson(state.persons, person);
+}
+
+function handleDeleteDebtAction(state: IState, payload: personActions.IDebtPayload) {
+  const person = payload.person.copyMe();
+
+  person.debts = removeArrayItemImmutable(person.debts, payload.debt.getIndexFunc());
+  return createNewStateWithUpdatedPerson(state.persons, person);
+}
+
+function handlePayDebtAction(state: IState, payload: personActions.IDebtPayload) {
+  const person = payload.person.copyMe();
+  const debt = payload.debt.copyMe();
+  debt.isPaid = true;
+
+  person.debts = updateArrayItemImmutable(person.debts, debt, debt.getIndexFunc());
+  return createNewStateWithUpdatedPerson(state.persons, person);
+}
