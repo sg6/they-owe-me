@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DebtManagementService} from '../../../providers/debt-management.service';
 import {Observable} from 'rxjs/Observable';
-import {Person} from '../../../../models/person';
+import {Person} from '../../../models/person';
 
 @Component({
   selector: 'app-person-list',

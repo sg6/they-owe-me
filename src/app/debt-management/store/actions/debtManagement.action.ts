@@ -1,6 +1,6 @@
 import {Action} from '@ngrx/store';
-import {Person} from '../models/person';
-import {Debt} from '../models/debt';
+import {Person} from '../../models/person';
+import {Debt} from '../../models/debt';
 
 export const CREATE_PERSON = 'CREATE_PERSON';
 export const EDIT_PERSON = 'EDIT_PERSON';

@@ -11,13 +11,16 @@ import {DebtDetailComponent} from './components/debts/detail/debt-detail.compone
 import {DebtEditComponent} from './components/debts/detail/debt-edit.component';
 import {DebtManagementService} from './providers/debt-management.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {debtManagementReducer} from './store/reducers/debtManagement.reducer';
+import {StoreModule} from '@ngrx/store';
 
 @NgModule({
   imports: [
     CommonModule,
     DebtManagementRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({debtManagement: debtManagementReducer}),
   ],
   declarations: [
     PersonListComponent,

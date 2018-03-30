@@ -19,8 +19,6 @@ export class Person implements IPerson {
 
   static createIndexFunc(personId: Number) {
     return (person: Person) => {
-      console.log(personId);
-      console.log(person.id);
       return person.id === personId;
     };
   }

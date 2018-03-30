@@ -1,7 +1,7 @@
 import {Person} from './person';
 
-export interface IAppState {
-  persons: {
+export interface IDebtManagementState {
+  debtManagement: {
     persons: Person[];
   };
 }
