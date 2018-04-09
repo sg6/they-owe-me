@@ -1,3 +1,29 @@
-<div>
-  debt-edit
-</div>
+<form [formGroup]="debtForm" novalidate>
+  <div>
+    <label>Name
+      <input type="text" class="form-control" name="title" formControlName="title">
+      <span *ngIf="debtForm.get('title').hasError('required') && debtForm.get('title').touched">
+        Name is required
+      </span>
+    </label>
+  </div>
+  <div>
+    <label>Description
+      <input type="text" class="form-control" name="description" formControlName="description">
+      <span *ngIf="debtForm.get('description').hasError('required') && debtForm.get('description').touched">
+        Description is required
+      </span>
+    </label>
+  </div>
+  <div>
+    <label>Amount
+      <input type="number" class="form-control" name="amount" formControlName="amount">
+      <span *ngIf="debtForm.get('amount').hasError('required') && debtForm.get('amount').touched">
+        Amount is required
+      </span>
+    </label>
+  </div>
+  <div>
+    <button [disabled]="debtForm.invalid" (click)="saveDebt()">Submit</button>
+  </div>
+</form>

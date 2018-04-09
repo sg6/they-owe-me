@@ -41,20 +41,20 @@ export class DebtManagementService {
     this.store.dispatch(new debtManagementActions.DeletePersonAction({person: person}));
   }
 
-  createDebt(person: Person, debt: Debt) {
-    this.store.dispatch(new debtManagementActions.CreateDebtAction({person: person, debt: debt}));
+  createDebt(personId: number, debt: Debt) {
+    this.store.dispatch(new debtManagementActions.CreateDebtAction({personId: personId, debt: debt}));
   }
 
-  editDebt(person: Person, debt: Debt) {
-    this.store.dispatch(new debtManagementActions.EditDebtAction({person: person, debt: debt}));
+  editDebt(personId: number, debt: Debt) {
+    this.store.dispatch(new debtManagementActions.EditDebtAction({personId: personId, debt: debt}));
   }
 
-  deleteDebt(person: Person, debt: Debt) {
-    this.store.dispatch(new debtManagementActions.DeleteDebtAction({person: person, debt: debt}));
+  deleteDebt(personId: number, debt: Debt) {
+    this.store.dispatch(new debtManagementActions.DeleteDebtAction({personId: personId, debt: debt}));
   }
 
-  payDebt(person: Person, debt: Debt) {
-    this.store.dispatch(new debtManagementActions.PayDebtAction({person: person, debt: debt}));
+  payDebt(personId: number, debt: Debt) {
+    this.store.dispatch(new debtManagementActions.PayDebtAction({personId: personId, debt: debt}));
   }
 
   private selectFeature = (state: IDebtManagementState) => state.debtManagement.persons;

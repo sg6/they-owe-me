@@ -41,7 +41,7 @@ export class DeletePersonAction implements Action {
 
 
 export interface IDebtPayload {
-  person: Person;
+  personId: number;
   debt: Debt;
 }
 

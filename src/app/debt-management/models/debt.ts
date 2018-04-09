@@ -1,5 +1,6 @@
 export interface IDebt {
   id: number;
+  title: string;
   amount: number;
   description: string;
   isPaid: boolean;
@@ -7,6 +8,7 @@ export interface IDebt {
 
 export class Debt implements IDebt {
   id: number;
+  title: string;
   amount: number;
   description: string;
   isPaid: boolean;
@@ -29,6 +31,7 @@ export class Debt implements IDebt {
     }
 
     this.id = json.id;
+    this.title = json.title;
     this.amount = json.amount;
     this.description = json.description;
     this.isPaid = json.isPaid;
@@ -37,6 +40,7 @@ export class Debt implements IDebt {
   toJson(): IDebt {
     return {
       id: this.id,
+      title: this.title,
       amount: this.amount,
       description: this.description,
       isPaid: this.isPaid

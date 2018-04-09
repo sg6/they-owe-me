@@ -15,11 +15,18 @@ describe('debtManagementReducer', () => {
           name: 'Nepomuk',
           description: 'some ugly guy',
           debts: [
-            new Debt({id: 0, amount: 100, description: 'beer', isPaid: false}),
+            new Debt({
+              id: 0,
+              title: 'beer',
+              amount: 100,
+              description: 'drunk a lot of beer',
+              isPaid: false
+            }),
             new Debt({
               id: 1,
+              title: 'lost a bet',
               amount: 10,
-              description: 'lost a bet, he thought i was not brave enough to shit in the girls-shower',
+              description: 'he thought i was not brave enough to shit in the girls-shower',
               isPaid: true
             })
           ]
@@ -29,8 +36,20 @@ describe('debtManagementReducer', () => {
           name: 'Sepp',
           description: 'this idiot is so broke, why did i lend him some money?!?!?!?',
           debts: [
-            new Debt({id: 0, amount: 30000, description: 'this idiot bought bitcoins in 2017Q4...', isPaid: false}),
-            new Debt({id: 1, amount: 100, description: 'pizza', isPaid: false})
+            new Debt({
+              id: 0,
+              title: 'bitcoins',
+              amount: 30000,
+              description: 'this idiot bought bitcoins in 2017Q4...',
+              isPaid: false
+            }),
+            new Debt({
+              id: 1,
+              title: 'pizza',
+              amount: 100,
+              description: 'with salami :)',
+              isPaid: false
+            })
           ]
         })
       ]
@@ -45,7 +64,10 @@ describe('debtManagementReducer', () => {
 
     newDebt = new Debt({
       id: 2,
-      amount: 33, description: 'entrance fee for kreisky-concert @ wuk/vienna', isPaid: false
+      title: 'kreisky-concert',
+      amount: 33,
+      description: 'entrance fee @ wuk/vienna',
+      isPaid: false
     });
   });
 
@@ -97,13 +119,13 @@ describe('debtManagementReducer', () => {
 
   describe('CreateDebtAction', () => {
     it('should add new debt to person', () => {
-      const action = new debtManagementActions.CreateDebtAction({person: oldState.persons[0], debt: newDebt});
+      const action = new debtManagementActions.CreateDebtAction({personId: 0, debt: newDebt});
       const result = debtManagementReducer(oldState, action);
       expect(result.persons[0].debts.length).toEqual(3);
     });
 
     it('should not modify old state', () => {
-      const action = new debtManagementActions.CreateDebtAction({person: oldState.persons[0], debt: newDebt});
+      const action = new debtManagementActions.CreateDebtAction({personId: 0, debt: newDebt});
       const result = debtManagementReducer(oldState, action);
       expect(oldState.persons[0].debts.length).toEqual(2);
     });
@@ -115,13 +137,13 @@ describe('debtManagementReducer', () => {
     });
 
     it('should update debt', () => {
-      const action = new debtManagementActions.EditDebtAction({person: oldState.persons[0], debt: newDebt});
+      const action = new debtManagementActions.EditDebtAction({personId: 0, debt: newDebt});
       const result = debtManagementReducer(oldState, action);
       expect(result.persons[0].debts[0]).toBe(newDebt);
     });
 
     it('should not modify old state', () => {
-      const action = new debtManagementActions.EditDebtAction({person: oldState.persons[0], debt: newDebt});
+      const action = new debtManagementActions.EditDebtAction({personId: 0, debt: newDebt});
       const result = debtManagementReducer(oldState, action);
       expect(oldState.persons[0].debts[0]).not.toBe(newDebt);
     });
@@ -129,13 +151,13 @@ describe('debtManagementReducer', () => {
 
   describe('DeleteDebtAction', () => {
     it('should remove debt', () => {
-      const action = new debtManagementActions.DeleteDebtAction({person: oldState.persons[0], debt: oldState.persons[0].debts[0]});
+      const action = new debtManagementActions.DeleteDebtAction({personId: 0, debt: oldState.persons[0].debts[0]});
       const result = debtManagementReducer(oldState, action);
       expect(result.persons[0].debts.length).toEqual(1);
     });
 
     it('should not modify old state', () => {
-      const action = new debtManagementActions.DeleteDebtAction({person: oldState.persons[0], debt: oldState.persons[0].debts[0]});
+      const action = new debtManagementActions.DeleteDebtAction({personId: 0, debt: oldState.persons[0].debts[0]});
       const result = debtManagementReducer(oldState, action);
       expect(oldState.persons[0].debts.length).toEqual(2);
     });
@@ -143,13 +165,13 @@ describe('debtManagementReducer', () => {
 
   describe('PayDebtAction', () => {
     it('should set debt as paid', () => {
-      const action = new debtManagementActions.PayDebtAction({person: oldState.persons[0], debt: oldState.persons[0].debts[0]});
+      const action = new debtManagementActions.PayDebtAction({personId: 0, debt: oldState.persons[0].debts[0]});
       const result = debtManagementReducer(oldState, action);
       expect(result.persons[0].debts[0].isPaid).toBeTruthy();
     });
 
     it('should not modify old state', () => {
-      const action = new debtManagementActions.PayDebtAction({person: oldState.persons[0], debt: oldState.persons[0].debts[0]});
+      const action = new debtManagementActions.PayDebtAction({personId: 0, debt: oldState.persons[0].debts[0]});
       const result = debtManagementReducer(oldState, action);
       expect(oldState.persons[0].debts[0].isPaid).toBeFalsy();
     });

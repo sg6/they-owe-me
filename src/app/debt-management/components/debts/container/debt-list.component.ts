@@ -21,4 +21,8 @@ export class DebtListComponent implements OnInit {
     this.personId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.debts$ = this.debtManagementService.getDebts(this.personId);
   }
+
+  deleteDebt(debt: Debt) {
+    this.debtManagementService.deleteDebt(this.personId, debt);
+  }
 }

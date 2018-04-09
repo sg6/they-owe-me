@@ -1,6 +1,9 @@
 import {Person} from '../../models/person';
 import * as debtManagementActions from '../actions/debtManagement.action';
-import {addNewArrayItemImmutable, createNewId, removeArrayItemImmutable, updateArrayItemImmutable} from '../../../helper/utilities';
+import {
+  addNewArrayItemImmutable, createNewId, getArrayItem, removeArrayItemImmutable,
+  updateArrayItemImmutable
+} from '../../../helper/utilities';
 
 export interface IState {
   persons: Person[];
@@ -63,31 +66,37 @@ function handleDeletePersonAction(state: IState, payload: debtManagementActions.
 }
 
 function handleCreateDebtAction(state: IState, payload: debtManagementActions.IDebtPayload) {
-  const person = payload.person.copyMe();
+  const person = getPersonCopy(state, payload.personId);
+  payload.debt.id = createNewId(person.debts);
 
   person.debts = addNewArrayItemImmutable(person.debts, payload.debt);
   return createNewStateWithUpdatedPerson(state.persons, person);
 }
 
 function handleEditDebtAction(state: IState, payload: debtManagementActions.IDebtPayload) {
-  const person = payload.person.copyMe();
+  const person = getPersonCopy(state, payload.personId);
 
   person.debts = updateArrayItemImmutable(person.debts, payload.debt, payload.debt.getIndexFunc());
   return createNewStateWithUpdatedPerson(state.persons, person);
 }
 
 function handleDeleteDebtAction(state: IState, payload: debtManagementActions.IDebtPayload) {
-  const person = payload.person.copyMe();
+  const person = getPersonCopy(state, payload.personId);
 
   person.debts = removeArrayItemImmutable(person.debts, payload.debt.getIndexFunc());
   return createNewStateWithUpdatedPerson(state.persons, person);
 }
 
 function handlePayDebtAction(state: IState, payload: debtManagementActions.IDebtPayload) {
-  const person = payload.person.copyMe();
+  const person = getPersonCopy(state, payload.personId);
   const debt = payload.debt.copyMe();
   debt.isPaid = true;
 
   person.debts = updateArrayItemImmutable(person.debts, debt, debt.getIndexFunc());
   return createNewStateWithUpdatedPerson(state.persons, person);
+}
+
+function getPersonCopy(state, personId): Person {
+  const person = getArrayItem(state.persons, Person.createIndexFunc(personId));
+  return person.copyMe();
 }
