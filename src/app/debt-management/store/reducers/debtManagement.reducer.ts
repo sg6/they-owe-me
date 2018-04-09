@@ -33,8 +33,8 @@ export function debtManagementReducer(state = initialState, action: debtManageme
     case debtManagementActions.DELETE_DEBT: {
       return handleDeleteDebtAction(state, <debtManagementActions.IDebtPayload>action.payload);
     }
-    case debtManagementActions.PAY_DEBT: {
-      return handlePayDebtAction(state, <debtManagementActions.IDebtPayload>action.payload);
+    case debtManagementActions.MARK_DEBT_AS_PAID: {
+      return handleMarkDebtAsPaidAction(state, <debtManagementActions.IDebtPayload>action.payload);
     }
     default: {
       return initialState;
@@ -87,7 +87,7 @@ function handleDeleteDebtAction(state: IState, payload: debtManagementActions.ID
   return createNewStateWithUpdatedPerson(state.persons, person);
 }
 
-function handlePayDebtAction(state: IState, payload: debtManagementActions.IDebtPayload) {
+function handleMarkDebtAsPaidAction(state: IState, payload: debtManagementActions.IDebtPayload) {
   const person = getPersonCopy(state, payload.personId);
   const debt = payload.debt.copyMe();
   debt.isPaid = true;

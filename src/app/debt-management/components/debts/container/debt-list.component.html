@@ -7,6 +7,7 @@
     <app-debt-item [debt]="debt"
                    [routerLink]="['/debt-management/person/detail/', personId, 'debt', 'detail', debt.id]">
     </app-debt-item>
+    <button *ngIf="!debt.isPaid" (click)="markDebtAsPaid(debt)">Paid</button>
     <button [routerLink]="['/debt-management/person/detail/', personId, 'debt', 'edit', debt.id]">Edit</button>
     <button (click)="deleteDebt(debt)">Delete</button>
   </div>

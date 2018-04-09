@@ -9,7 +9,7 @@ export const DELETE_PERSON = 'DELETE_PERSON';
 export const CREATE_DEBT = 'CREATE_DEBT';
 export const EDIT_DEBT = 'EDIT_DEBT';
 export const DELETE_DEBT = 'DELETE_DEBT';
-export const PAY_DEBT = 'PAY_DEBT';
+export const MARK_DEBT_AS_PAID = 'MARK_DEBT_AS_PAID';
 
 export interface IPersonPayload {
   person: Person;
@@ -69,8 +69,8 @@ export class DeleteDebtAction implements Action {
   }
 }
 
-export class PayDebtAction implements Action {
-  readonly type = PAY_DEBT;
+export class MarkDebtAsPaidAction implements Action {
+  readonly type = MARK_DEBT_AS_PAID;
 
   constructor(public payload: IDebtPayload) {
 
@@ -84,4 +84,4 @@ export type Actions
   | CreateDebtAction
   | EditDebtAction
   | DeleteDebtAction
-  | PayDebtAction;
+  | MarkDebtAsPaidAction;

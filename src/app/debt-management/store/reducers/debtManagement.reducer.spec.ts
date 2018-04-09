@@ -119,15 +119,15 @@ describe('debtManagementReducer', () => {
     });
   });
 
-  describe('PayDebtAction', () => {
+  describe('MarkDebtAsPaidAction', () => {
     it('should set debt as paid', () => {
-      const action = new debtManagementActions.PayDebtAction({personId: 0, debt: oldState.persons[0].debts[0]});
+      const action = new debtManagementActions.MarkDebtAsPaidAction({personId: 0, debt: oldState.persons[0].debts[0]});
       const result = debtManagementReducer(oldState, action);
       expect(result.persons[0].debts[0].isPaid).toBeTruthy();
     });
 
     it('should not modify old state', () => {
-      const action = new debtManagementActions.PayDebtAction({personId: 0, debt: oldState.persons[0].debts[0]});
+      const action = new debtManagementActions.MarkDebtAsPaidAction({personId: 0, debt: oldState.persons[0].debts[0]});
       const result = debtManagementReducer(oldState, action);
       expect(oldState.persons[0].debts[0].isPaid).toBeFalsy();
     });

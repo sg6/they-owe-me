@@ -53,8 +53,8 @@ export class DebtManagementService {
     this.store.dispatch(new debtManagementActions.DeleteDebtAction({personId: personId, debt: debt}));
   }
 
-  payDebt(personId: number, debt: Debt) {
-    this.store.dispatch(new debtManagementActions.PayDebtAction({personId: personId, debt: debt}));
+  markDebtAsPaid(personId: number, debt: Debt) {
+    this.store.dispatch(new debtManagementActions.MarkDebtAsPaidAction({personId: personId, debt: debt}));
   }
 
   private selectFeature = (state: IDebtManagementState) => state.debtManagement.persons;

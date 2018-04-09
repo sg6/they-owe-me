@@ -22,6 +22,10 @@ export class DebtListComponent implements OnInit {
     this.debts$ = this.debtManagementService.getDebts(this.personId);
   }
 
+  markDebtAsPaid(debt: Debt) {
+    this.debtManagementService.markDebtAsPaid(this.personId, debt);
+  }
+
   deleteDebt(debt: Debt) {
     this.debtManagementService.deleteDebt(this.personId, debt);
   }
