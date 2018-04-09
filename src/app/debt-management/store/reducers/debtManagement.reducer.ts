@@ -4,14 +4,14 @@ import {
   addNewArrayItemImmutable, createNewId, getArrayItem, removeArrayItemImmutable,
   updateArrayItemImmutable
 } from '../../../helper/utilities';
+import {getTestState} from '../../testData/state';
 
 export interface IState {
   persons: Person[];
 }
 
-const initialState: IState = {
-  persons: []
-};
+// temporaly using data from unit-tests as initialState
+const initialState = getTestState();
 
 export function debtManagementReducer(state = initialState, action: debtManagementActions.Actions): IState {
   switch (action.type) {
