@@ -1,3 +1,10 @@
-<div>
-  debt-detail
-</div>
+<header>
+  <h2>Debtdetails</h2>
+</header>
+<section *ngIf="debt$ | async as debt">
+  <section class="details">
+    <div>{{ debt.title }}</div>
+    <div>{{ debt.amount }}</div>
+    <div>{{ debt.description }}</div>
+  </section>
+</section>

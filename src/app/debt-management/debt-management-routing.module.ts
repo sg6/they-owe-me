@@ -4,12 +4,14 @@ import {PersonListComponent} from './components/persons/container/person-list.co
 import {PersonEditComponent} from './components/persons/detail/person-edit.component';
 import {PersonDetailComponent} from './components/persons/detail/person-detail.component';
 import {DebtEditComponent} from './components/debts/detail/debt-edit.component';
+import {DebtDetailComponent} from './components/debts/detail/debt-detail.component';
 
 const routes: Routes = [
   {path: '', component: PersonListComponent},
   {path: 'person/edit/:id', component: PersonEditComponent},
   {path: 'person/detail/:id', component: PersonDetailComponent},
-  {path: 'person/detail/:personId/debt/edit/:debtId', component: DebtEditComponent}
+  {path: 'person/detail/:personId/debt/edit/:debtId', component: DebtEditComponent},
+  {path: 'person/detail/:personId/debt/detail/:debtId', component: DebtDetailComponent}
 ];
 
 @NgModule({
