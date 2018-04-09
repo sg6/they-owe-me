@@ -1,3 +1,4 @@
-<div>
-  debt-item
-</div>
+<span>{{ debt.title }}</span>
+<span>{{ debt.amount }}</span>
+<span *ngIf="debt.isPaid">paid</span>
+<span *ngIf="!debt.isPaid">not paid</span>

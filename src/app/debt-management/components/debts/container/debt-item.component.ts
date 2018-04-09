@@ -7,5 +7,4 @@ import {Debt} from '../../../models/debt';
 })
 export class DebtItemComponent {
   @Input() debt: Debt;
-
 }
