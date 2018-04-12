@@ -5,9 +5,10 @@ import {PersonEditComponent} from './components/persons/detail/person-edit.compo
 import {PersonDetailComponent} from './components/persons/detail/person-detail.component';
 import {DebtEditComponent} from './components/debts/detail/debt-edit.component';
 import {DebtDetailComponent} from './components/debts/detail/debt-detail.component';
+import {SidenavComponent} from './components/sidenav/sidenav.component';
 
 const routes: Routes = [
-  {path: '', component: PersonListComponent},
+  {path: '', component: SidenavComponent},
   {path: 'person/edit/:id', component: PersonEditComponent},
   {path: 'person/detail/:id', component: PersonDetailComponent},
   {path: 'person/detail/:personId/debt/edit/:debtId', component: DebtEditComponent},

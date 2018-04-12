@@ -1,3 +1,13 @@
-<p>
-  sidenav works!
-</p>
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav class="mat-elevation-z10"
+      [opened]="!isScreenSmall()"
+      [mode]="isScreenSmall() ? 'over' : 'side'">
+    <dm-person-list></dm-person-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <dm-main-content></dm-main-content>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

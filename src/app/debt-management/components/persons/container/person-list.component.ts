@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Person} from '../../../models/person';
 
 @Component({
-  selector: 'app-person-list',
+  selector: 'dm-person-list',
   templateUrl: './person-list.component.html',
   styleUrls: ['./persons.container.css']
 })
