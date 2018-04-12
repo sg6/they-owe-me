@@ -15,6 +15,8 @@ import {debtManagementReducer} from './store/reducers/debtManagement.reducer';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {MaterialModule} from '../shared/material.module';
+import { MainContentComponent } from './components/main-content/main-content.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
   imports: [
@@ -34,7 +36,9 @@ import {MaterialModule} from '../shared/material.module';
     DebtListComponent,
     DebtItemComponent,
     DebtDetailComponent,
-    DebtEditComponent
+    DebtEditComponent,
+    MainContentComponent,
+    SidenavComponent
   ],
   providers: [
     DebtManagementService
