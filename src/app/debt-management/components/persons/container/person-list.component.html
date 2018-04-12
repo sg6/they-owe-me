@@ -1,11 +1,22 @@
-<header>
+<mat-toolbar color="primary">
   <h2>Persons</h2>
-  <button [routerLink]="['/debt-management/person/edit', 'new']">Add</button>
-</header>
+  <button mat-icon-button>
+    <mat-icon>add-box</mat-icon>
+  </button>
+</mat-toolbar>
+
 <section>
-  <div class="row" *ngFor="let person of persons$ | async">
-    <app-person-item [person]="person" [routerLink]="['person/detail', person.id]"></app-person-item>
-    <button [routerLink]="['/debt-management/person/edit', person.id]">Edit</button>
-    <button (click)="deletePerson(person)">Delete</button>
+  <mat-nav-list>
+    <mat-list-item *ngFor="let person of persons$ | async">
+      <app-person-item [person]="person" [routerLink]="['person/detail', person.id]"></app-person-item>
+      <button mat-icon-button><mat-icon>edit</mat-icon></button>
+      <button (click)="deletePerson(person)" mat-icon-button><mat-icon>delete</mat-icon></button>
+    </mat-list-item>
+  </mat-nav-list>
+
+
+  <div class="row">
+
+
   </div>
 </section>
