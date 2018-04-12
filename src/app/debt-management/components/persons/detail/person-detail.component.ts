@@ -6,8 +6,7 @@ import {DebtManagementService} from '../../../providers/debt-management.service'
 
 @Component({
   selector: 'app-person-detail',
-  templateUrl: './person-detail.component.html',
-  styleUrls: ['./person-detail.component.scss']
+  templateUrl: './person-detail.component.html'
 })
 export class PersonDetailComponent implements OnInit {
   personId: number;
