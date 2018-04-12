@@ -6,7 +6,7 @@ import {Person} from '../../../models/person';
 @Component({
   selector: 'dm-person-list',
   templateUrl: './person-list.component.html',
-  styleUrls: ['./persons.container.css']
+  styleUrls: ['./person-list.component.scss']
 })
 export class PersonListComponent implements OnInit {
   persons$: Observable<Person[]>;

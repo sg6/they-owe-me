@@ -3,7 +3,10 @@
   <mat-sidenav #sidenav class="mat-elevation-z10"
       [opened]="!isScreenSmall()"
       [mode]="isScreenSmall() ? 'over' : 'side'">
+
+    <mat-toolbar color="primary">Persons</mat-toolbar>
     <dm-person-list></dm-person-list>
+
   </mat-sidenav>
 
   <mat-sidenav-content>

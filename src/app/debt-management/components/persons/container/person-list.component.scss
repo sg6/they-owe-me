@@ -7,6 +7,8 @@ app-person-item {
   width: 100%;
 }
 
-.row button:first-of-type {
-  margin-right: 10px;
+.row {
+  button:first-of-type {
+    margin-right: 10px;
+  }
 }
