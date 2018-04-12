@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {debtManagementReducer} from './store/reducers/debtManagement.reducer';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {MaterialModule} from '../shared/material.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     DebtManagementRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MaterialModule,
     StoreModule.forRoot({debtManagement: debtManagementReducer}),
     StoreDevtoolsModule.instrument({maxAge: 25})
   ],
