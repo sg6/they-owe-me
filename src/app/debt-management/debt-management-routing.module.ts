@@ -8,9 +8,14 @@ import {DebtDetailComponent} from './components/debts/detail/debt-detail.compone
 import {SidenavComponent} from './components/container/sidenav/sidenav.component';
 
 const routes: Routes = [
-  {path: '', component: SidenavComponent},
+  {
+    path: '', component: SidenavComponent,
+    children: [
+      {path: 'person/detail/:id', component: PersonDetailComponent},
+      {path: '', component: PersonDetailComponent}
+    ]
+  },
   {path: 'person/edit/:id', component: PersonEditComponent},
-  {path: 'person/detail/:id', component: PersonDetailComponent},
   {path: 'person/detail/:personId/debt/edit/:debtId', component: DebtEditComponent},
   {path: 'person/detail/:personId/debt/detail/:debtId', component: DebtDetailComponent}
 ];

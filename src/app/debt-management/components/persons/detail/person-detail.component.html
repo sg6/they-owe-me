@@ -1,12 +1,20 @@
-<header>
-  <h2>Persondetails</h2>
-</header>
-<section *ngIf="person$ | async as person">
-  <section class="details">
-    <div>{{ person.name }}</div>
-    <div>{{ person.description }}</div>
-  </section>
-  <section class="debts">
-    <app-debt-list></app-debt-list>
-  </section>
-</section>
+<mat-card *ngIf="person$ | async as person; else noUserSelected">
+  <mat-card-header>
+    <h2>{{ person.name }}</h2>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab label="Details">
+        <p>{{ person.description }}</p>
+      </mat-tab>
+      <mat-tab label="Debts">
+        <app-debt-list></app-debt-list>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #noUserSelected>
+  No user selected, nothing to display...
+</ng-template>

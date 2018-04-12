@@ -6,18 +6,24 @@ import {DebtManagementService} from '../../../providers/debt-management.service'
 
 @Component({
   selector: 'app-person-detail',
-  templateUrl: './person-detail.component.html'
+  templateUrl: './person-detail.component.html',
+  styleUrls: ['./person-detail.component.scss']
 })
 export class PersonDetailComponent implements OnInit {
   personId: number;
   person$: Observable<Person>;
 
-  constructor(private activatedRoute: ActivatedRoute, private debtManagementService: DebtManagementService) {
+  constructor(private route: ActivatedRoute, private debtManagementService: DebtManagementService) {
 
   }
 
   ngOnInit() {
-    this.personId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.person$ = this.debtManagementService.getPerson(this.personId);
+    this.route.params.subscribe(params => {
+      this.personId = parseInt(params['id']);
+
+      if (this.personId !== undefined) {
+        this.person$ = this.debtManagementService.getPerson(this.personId);
+      }
+    });
   }
 }
