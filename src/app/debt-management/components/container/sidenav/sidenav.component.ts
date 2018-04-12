@@ -1,4 +1,6 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {MatSidenav} from '@angular/material';
 
 const SMALL_WIDTH_BREAKPOINT = 720;
 
@@ -11,13 +13,21 @@ export class SidenavComponent implements OnInit {
 
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
-  constructor(private zone: NgZone) {
+  @ViewChild(MatSidenav) sidenav: MatSidenav;
+
+  constructor(private zone: NgZone, private router: Router) {
 
   }
 
   ngOnInit() {
     this.mediaMatcher.addListener(mql =>
       this.zone.run(() => this.mediaMatcher = mql));
+
+    this.router.events.subscribe(() => {
+      if (this.isScreenSmall()) {
+        this.sidenav.close();
+      }
+    });
   }
 
   isScreenSmall() {
