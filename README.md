@@ -1,6 +1,6 @@
 # TheyOweMe
 
-simple app to test ngrx/redux, angular-material (Not implemented yet) and pwa (Not implemented yet). 
+simple app to test ngrx/redux, angular-material and pwa (Not implemented yet). 
 
 ## Features
 * maintain list of persons and their debts
