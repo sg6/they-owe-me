@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DebtManagementService} from '../../../providers/debt-management.service';
 import {Debt} from '../../../models/debt';
 
@@ -9,9 +9,13 @@ import {Debt} from '../../../models/debt';
   templateUrl: './debt-edit.component.html'
 })
 export class DebtEditComponent {
-  debtForm: FormGroup;
   personId: number;
   debtId: number;
+  debt: Debt;
+
+  title = new FormControl('', [Validators.required]);
+  description = new FormControl('', [Validators.required]);
+  amount = new FormControl('', [Validators.required]);
 
   constructor(private debtManagementService: DebtManagementService,
               private router: Router,
@@ -29,7 +33,7 @@ export class DebtEditComponent {
 
     const paramDebtId = this.activatedRoute.snapshot.params['debtId'];
     this.debtId = paramDebtId === 'new' ? -1 : parseInt(paramDebtId);
-    this.buildForm();
+    this.debt = new Debt(null);
 
     if (!this.isNewDebt) {
       this.getDebt();
@@ -38,27 +42,24 @@ export class DebtEditComponent {
 
   getDebt() {
     this.debtManagementService.getDebt(this.personId, this.debtId)
-      .subscribe(debt => this.debtForm.patchValue(debt));
-  }
-
-  buildForm() {
-    this.debtForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      amount: ['', Validators.required]
-    });
+      .subscribe(debt => this.debt = debt);
   }
 
   saveDebt() {
-    const debt = new Debt(this.debtForm.value);
-
     if (this.isNewDebt) {
-      this.debtManagementService.createDebt(this.personId, debt);
+      this.debtManagementService.createDebt(this.personId, this.debt);
     } else {
-      debt.id = this.debtId;
-      this.debtManagementService.editDebt(this.personId, debt);
+      this.debtManagementService.editDebt(this.personId, this.debt);
     }
 
-    this.router.navigate(['/debt-management/person/detail/' + this.personId]);
+    this.navigateBackToPerson();
+  }
+
+  cancel() {
+    this.navigateBackToPerson();
+  }
+
+  private navigateBackToPerson() {
+    this.router.navigate(['/debt-management/person/detail', this.personId]);
   }
 }

@@ -1,29 +1,36 @@
-<form [formGroup]="debtForm" novalidate>
-  <div>
-    <label>Name
-      <input type="text" class="form-control" name="title" formControlName="title">
-      <span *ngIf="debtForm.get('title').hasError('required') && debtForm.get('title').touched">
-        Name is required
-      </span>
-    </label>
-  </div>
-  <div>
-    <label>Description
-      <input type="text" class="form-control" name="description" formControlName="description">
-      <span *ngIf="debtForm.get('description').hasError('required') && debtForm.get('description').touched">
-        Description is required
-      </span>
-    </label>
-  </div>
-  <div>
-    <label>Amount
-      <input type="number" class="form-control" name="amount" formControlName="amount">
-      <span *ngIf="debtForm.get('amount').hasError('required') && debtForm.get('amount').touched">
-        Amount is required
-      </span>
-    </label>
-  </div>
-  <div>
-    <button [disabled]="debtForm.invalid" (click)="saveDebt()">Submit</button>
-  </div>
-</form>
+<mat-card>
+  <mat-card-header>
+    <h2 *ngIf="isNewPerson">Create new debt</h2>
+    <h2 *ngIf="!isNewPerson">Edit debt</h2>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Title" [formControl]="title" [(ngModel)]="debt.title" required>
+        <mat-error *ngIf="title.invalid">Title is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Description" [formControl]="description" [(ngModel)]="debt.description" required>
+        <mat-error *ngIf="description.invalid">Description is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input type="number" matInput placeholder="Amount" [formControl]="amount" [(ngModel)]="debt.amount" required>
+        <mat-error *ngIf="description.invalid">Amount is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <footer>
+      <button mat-button color="primary" (click)="saveDebt()">
+        <mat-icon>save</mat-icon>Save
+      </button>
+      <button mat-button color="primary" (click)="cancel()">
+        <mat-icon>cancel</mat-icon>Cancel
+      </button>
+    </footer>
+  </mat-card-content>
+</mat-card>
