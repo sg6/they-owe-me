@@ -1,12 +1,12 @@
-header, section .row {
+mat-toolbar, mat-list-item {
   display: flex;
   justify-content: space-between;
 }
 
-app-debt-item {
+a[matLine] {
   width: 100%;
 }
 
-.row button:first-of-type {
+mat-list-item button:first-of-type {
   margin-right: 10px;
 }

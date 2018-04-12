@@ -5,7 +5,7 @@ import {DebtManagementService} from '../../../providers/debt-management.service'
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-debt-list',
+  selector: 'dm-debt-list',
   templateUrl: './debt-list.component.html',
   styleUrls: ['./debt-list.component.scss']
 })

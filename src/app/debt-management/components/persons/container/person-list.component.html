@@ -5,14 +5,12 @@
   </button>
 </mat-toolbar>
 
-<section>
-  <mat-nav-list>
-    <mat-list-item *ngFor="let person of persons$ | async">
-      <a matLine [routerLink]="['/debt-management/person/detail', person.id]">
-        {{ person.name }}
-      </a>
-      <button [routerLink]="['/debt-management/person/edit', person.id]" mat-icon-button><mat-icon>edit</mat-icon></button>
-      <button (click)="deletePerson(person)" mat-icon-button><mat-icon>delete</mat-icon></button>
-    </mat-list-item>
-  </mat-nav-list>
-</section>
+<mat-nav-list>
+  <mat-list-item *ngFor="let person of persons$ | async">
+    <a matLine [routerLink]="['/debt-management/person/detail', person.id]">
+      {{ person.name }}
+    </a>
+    <button [routerLink]="['/debt-management/person/edit', person.id]" mat-icon-button><mat-icon>edit</mat-icon></button>
+    <button (click)="deletePerson(person)" mat-icon-button><mat-icon>delete</mat-icon></button>
+  </mat-list-item>
+</mat-nav-list>

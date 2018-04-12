@@ -1,14 +1,27 @@
-<header>
+<mat-toolbar color="background">
   <h3>Debts</h3>
-  <button [routerLink]="['/debt-management/person/detail/', personId, 'debt', 'edit', 'new']">Create Debt</button>
-</header>
-<section>
-  <div class="row" *ngFor="let debt of debts$ | async">
-    <app-debt-item [debt]="debt"
-                   [routerLink]="['/debt-management/person/detail/', personId, 'debt', 'detail', debt.id]">
-    </app-debt-item>
-    <button *ngIf="!debt.isPaid" (click)="markDebtAsPaid(debt)">Paid</button>
-    <button [routerLink]="['/debt-management/person/detail/', personId, 'debt', 'edit', debt.id]">Edit</button>
-    <button (click)="deleteDebt(debt)">Delete</button>
-  </div>
-</section>
+  <button mat-icon-button>
+    <mat-icon [routerLink]="['/debt-management/person/detail/', personId, 'debt', 'edit', 'new']">add-box</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-nav-list>
+  <mat-list-item *ngFor="let debt of debts$ | async">
+    <a matLine [routerLink]="['/debt-management/person/detail/', personId, 'debt', 'detail', debt.id]">
+      <span>{{ debt.title }} - </span>
+      <span>{{ debt.amount }} &euro; - </span>
+      <span *ngIf="debt.isPaid">paid</span>
+      <span *ngIf="!debt.isPaid">not paid</span>
+    </a>
+
+    <button [hidden]="debt.isPaid" (click)="markDebtAsPaid(debt)" mat-icon-button>
+      <mat-icon [hidden]="debt.isPaid">euro_symbol</mat-icon>
+    </button>
+    <button [routerLink]="['/debt-management/person/detail/', personId, 'debt', 'edit', debt.id]" mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button (click)="deleteDebt(debt)" mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-nav-list>
