@@ -12,10 +12,10 @@ const routes: Routes = [
     path: '', component: SidenavComponent,
     children: [
       {path: 'person/detail/:id', component: PersonDetailComponent},
+      {path: 'person/edit/:id', component: PersonEditComponent},
       {path: '', component: PersonDetailComponent}
     ]
   },
-  {path: 'person/edit/:id', component: PersonEditComponent},
   {path: 'person/detail/:personId/debt/edit/:debtId', component: DebtEditComponent},
   {path: 'person/detail/:personId/debt/detail/:debtId', component: DebtDetailComponent}
 ];

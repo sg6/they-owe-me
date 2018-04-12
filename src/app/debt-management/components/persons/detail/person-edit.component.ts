@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {DebtManagementService} from '../../../providers/debt-management.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Person} from '../../../models/person';
@@ -8,9 +8,12 @@ import {Person} from '../../../models/person';
   selector: 'app-person-edit',
   templateUrl: './person-edit.component.html'
 })
-export class PersonEditComponent implements OnInit{
-  personForm: FormGroup;
+export class PersonEditComponent implements OnInit {
   personId: number;
+  person: Person;
+
+  name = new FormControl('', [Validators.required]);
+  description = new FormControl('', [Validators.required]);
 
   constructor(private debtManagementService: DebtManagementService,
               private router: Router,
@@ -26,36 +29,33 @@ export class PersonEditComponent implements OnInit{
   ngOnInit() {
     const paramId = this.activatedRoute.snapshot.params['id'];
     this.personId = paramId === 'new' ? -1 : parseInt(paramId);
-    this.buildForm();
+    this.person = new Person(null);
 
     if (!this.isNewPerson) {
       this.getPerson();
     }
-
   }
 
   getPerson() {
     this.debtManagementService.getPerson(this.personId)
-      .subscribe(person => this.personForm.patchValue(person));
-  }
-
-  buildForm() {
-    this.personForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required]
-    });
+      .subscribe(person => this.person = person.copyMe());
   }
 
   savePerson() {
-    const person = new Person(this.personForm.value);
-
     if (this.isNewPerson) {
-      this.debtManagementService.createPerson(person);
+      this.debtManagementService.createPerson(this.person);
     } else {
-      person.id = this.personId;
-      this.debtManagementService.editPerson(person);
+      this.debtManagementService.editPerson(this.person);
     }
 
+    this.navigateHome();
+  }
+
+  cancel() {
+    this.navigateHome();
+  }
+
+  private navigateHome() {
     this.router.navigate([`/debt-management`]);
   }
 }
