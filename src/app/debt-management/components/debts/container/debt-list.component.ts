@@ -13,13 +13,15 @@ export class DebtListComponent implements OnInit {
   personId: number;
   debts$: Observable<Debt[]>;
 
-  constructor(private debtManagementService: DebtManagementService, private activatedRoute: ActivatedRoute) {
+  constructor(private debtManagementService: DebtManagementService, private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    this.personId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.debts$ = this.debtManagementService.getDebts(this.personId);
+    this.route.params.subscribe((params) => {
+      this.personId = parseInt(params['id']);
+      this.debts$ = this.debtManagementService.getDebts(this.personId);
+    });
   }
 
   markDebtAsPaid(debt: Debt) {
