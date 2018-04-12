@@ -1,3 +1,11 @@
-<p>
-  main-content works!
-</p>
+<mat-toolbar color="primary">
+  <button mat-button class="sidenav-toggle" (click)="toggleSidenav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>Debt Manager</span>
+</mat-toolbar>
+
+<section class="wrapper">
+  <router-outlet></router-outlet>
+</section>

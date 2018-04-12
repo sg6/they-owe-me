@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'dm-main-content',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainContentComponent implements OnInit {
 
-  constructor() { }
+  @Output() toggleSidenav = new EventEmitter<void>();
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

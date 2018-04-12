@@ -1,0 +1,26 @@
+$mainToolbarIconWidth: 56px;
+
+.sidenav-toggle {
+  display: none;
+  padding: 0;
+  margin: 8px;
+  min-width: $mainToolbarIconWidth;
+
+  @media (max-width: 720px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  mat-icon {
+    font-size: 30px;
+    height: $mainToolbarIconWidth;
+    width: $mainToolbarIconWidth;
+    line-height: $mainToolbarIconWidth;
+    color: white;
+  }
+}
+
+.wrapper {
+  margin: 50px;
+}
