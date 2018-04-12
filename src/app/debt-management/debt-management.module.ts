@@ -15,8 +15,8 @@ import {debtManagementReducer} from './store/reducers/debtManagement.reducer';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {MaterialModule} from '../shared/material.module';
-import { MainContentComponent } from './components/main-content/main-content.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { MainContentComponent } from './components/container/main-content/main-content.component';
+import { SidenavComponent } from './components/container/sidenav/sidenav.component';
 
 @NgModule({
   imports: [
