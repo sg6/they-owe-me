@@ -16,6 +16,7 @@ import {MaterialModule} from '../shared/material.module';
 import { MainContentComponent } from './components/container/main-content/main-content.component';
 import { SidenavComponent } from './components/container/sidenav/sidenav.component';
 import { DebtsPaymentStatePipe } from './pipes/debts-payment-state.pipe';
+import {SnackbarService} from './providers/snackbar.service';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { DebtsPaymentStatePipe } from './pipes/debts-payment-state.pipe';
     DebtsPaymentStatePipe
   ],
   providers: [
-    DebtManagementService
+    DebtManagementService,
+    SnackbarService
   ]
 })
 export class DebtManagementModule {

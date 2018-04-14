@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {DebtManagementService} from '../../../providers/debt-management.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Person} from '../../../models/person';
+import {SnackbarService} from '../../../providers/snackbar.service';
 
 @Component({
   selector: 'app-person-edit',
@@ -18,7 +19,8 @@ export class PersonEditComponent implements OnInit {
   constructor(private debtManagementService: DebtManagementService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private fb: FormBuilder) {
+              private snackbarService: SnackbarService
+              ) {
 
   }
 
@@ -44,8 +46,10 @@ export class PersonEditComponent implements OnInit {
   savePerson() {
     if (this.isNewPerson) {
       this.debtManagementService.createPerson(this.person);
+      this.snackbarService.open('Person ' + this.person.name + ' created');
     } else {
       this.debtManagementService.editPerson(this.person);
+      this.snackbarService.open('Person ' + this.person.name + ' edited');
     }
 
     this.navigateHome();

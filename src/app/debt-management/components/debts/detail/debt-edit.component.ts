@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {DebtManagementService} from '../../../providers/debt-management.service';
 import {Debt} from '../../../models/debt';
+import {SnackbarService} from '../../../providers/snackbar.service';
 
 @Component({
   selector: 'app-debt-edit',
@@ -20,7 +21,7 @@ export class DebtEditComponent {
   constructor(private debtManagementService: DebtManagementService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private fb: FormBuilder) {
+              private snackbarService: SnackbarService) {
 
   }
 
@@ -48,8 +49,10 @@ export class DebtEditComponent {
   saveDebt() {
     if (this.isNewDebt) {
       this.debtManagementService.createDebt(this.personId, this.debt);
+      this.snackbarService.open('Debt ' + this.debt.title + ' created');
     } else {
       this.debtManagementService.editDebt(this.personId, this.debt);
+      this.snackbarService.open('Debt ' + this.debt.title + ' edited');
     }
 
     this.navigateBackToPerson();
