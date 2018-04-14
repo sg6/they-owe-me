@@ -1,27 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Component, Input} from '@angular/core';
 import {Debt} from '../../../models/debt';
 import {DebtManagementService} from '../../../providers/debt-management.service';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'dm-debt-list',
   templateUrl: './debt-list.component.html',
   styleUrls: ['./debt-list.component.scss']
 })
-export class DebtListComponent implements OnInit {
-  personId: number;
-  debts$: Observable<Debt[]>;
+export class DebtListComponent {
+  @Input() personId: number;
+  @Input() debts: Debt[];
 
-  constructor(private debtManagementService: DebtManagementService, private route: ActivatedRoute) {
+  constructor(private debtManagementService: DebtManagementService) {
 
-  }
-
-  ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.personId = parseInt(params['id']);
-      this.debts$ = this.debtManagementService.getDebts(this.personId);
-    });
   }
 
   markDebtAsPaid(debt: Debt) {

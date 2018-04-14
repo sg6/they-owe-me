@@ -6,7 +6,7 @@
 </mat-toolbar>
 
 <mat-list>
-  <mat-list-item *ngFor="let debt of debts$ | async">
+  <mat-list-item *ngFor="let debt of debts">
     <div matLine [matTooltip]="debt.description">
       <span>{{ debt.title }} - </span>
       <span>{{ debt.amount }} &euro; - </span>

@@ -9,7 +9,7 @@
         <p>{{ person.description }}</p>
       </mat-tab>
       <mat-tab label="Debts">
-        <dm-debt-list></dm-debt-list>
+        <dm-debt-list [debts]="debts$ | async" [personId]="person.id"></dm-debt-list>
       </mat-tab>
     </mat-tab-group>
   </mat-card-content>
